@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import React, { useState } from 'react'
 
@@ -6,7 +5,7 @@ import styled from 'styled-components'
 
 
 const AppContainer = styled.div`
- margin: 40vh 30vw;
+ margin: 10vh 30vw;
 `
 
 const TodoItemContainer = styled.div`
@@ -49,6 +48,11 @@ function TodoForm(props) {
     </form>
   )
 }
+
+const ButtonInput = styled.button`
+  font-size: large;
+  ` 
+
 function SkipButtonComponent(props) {
   const handleClick = e => {
     e.preventDefault()
@@ -56,9 +60,9 @@ function SkipButtonComponent(props) {
 
   }
   return (
-    <button type="button" onClick={handleClick}>
-      Skip
-    </button>
+    <ButtonInput type="button" onClick={handleClick}>
+      Skip first todo
+    </ButtonInput>
   )
 }
 
@@ -84,6 +88,7 @@ function App() {
   return (
     <AppContainer>
       <h1>todos</h1>
+      <p> Click on a todo to delete it.</p>
       <SkipButtonComponent addCallback={skipTodo}/>
       {todos.map((item, i) => <TodoItem
         key={i}

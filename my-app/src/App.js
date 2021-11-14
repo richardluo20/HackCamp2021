@@ -49,6 +49,18 @@ function TodoForm(props) {
     </form>
   )
 }
+function SkipButtonComponent(props) {
+  const handleClick = e => {
+    e.preventDefault()
+    props.addCallback()
+
+  }
+  return (
+    <button type="button" onClick={handleClick}>
+      Skip
+    </button>
+  )
+}
 
 function App() {
   const [todos, setTodos] = useState(["do laundry", "finish homework"])
@@ -64,9 +76,15 @@ function App() {
     setTodos(newTodos)
   }
 
+  const skipTodo = () => {
+    const newTodos = [todos[1], ...todos.slice(2), todos[0]]
+    setTodos(newTodos)
+  }
+
   return (
     <AppContainer>
       <h1>todos</h1>
+      <SkipButtonComponent addCallback={skipTodo}/>
       {todos.map((item, i) => <TodoItem
         key={i}
         name={item}

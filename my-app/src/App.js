@@ -12,6 +12,7 @@ const TodoItemContainer = styled.div`
   &:hover > p {
     text-decoration: line-through;
   }
+
 `
 
 function TodoItem(props) {
@@ -53,15 +54,15 @@ const ButtonInput = styled.button`
   font-size: large;
   ` 
 
-function SkipButtonComponent(props) {
+function ButtonComponent(props) {
   const handleClick = e => {
     e.preventDefault()
     props.addCallback()
 
   }
   return (
-    <ButtonInput type="button" onClick={handleClick}>
-      Skip first todo
+    <ButtonInput type="button" onClick={handleClick} id={props.id}>
+      {props.text}
     </ButtonInput>
   )
 }
@@ -85,17 +86,23 @@ function App() {
     setTodos(newTodos)
   }
 
+  const clearTodos = () => {
+    const newTodos = []
+    setTodos(newTodos);
+  }
+
   return (
     <AppContainer>
       <h1>todos</h1>
       <p> Click on a todo to delete it.</p>
-      <SkipButtonComponent addCallback={skipTodo}/>
+      <ButtonComponent addCallback={skipTodo} text="Skip first todo" id="skip"/>
       {todos.map((item, i) => <TodoItem
         key={i}
         name={item}
         deleteCallback={() => deleteTodo(i)}
       />)}
       <TodoForm addCallback={addTodo} />
+      <ButtonComponent addCallback={clearTodos} text="Clear all todos" id="Clear"/>
     </AppContainer>
   )
 }
